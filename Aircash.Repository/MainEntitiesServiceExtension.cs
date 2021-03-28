@@ -1,4 +1,4 @@
-﻿using Aircash.Business.Settings;
+﻿using Aircash.DataContract.Settings;
 using Aircash.Repository.DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

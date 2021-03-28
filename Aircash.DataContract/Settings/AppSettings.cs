@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Aircash.Business.Settings
+namespace Aircash.DataContract.Settings
 {
     public class AppSettings
     {

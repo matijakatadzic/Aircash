@@ -1,8 +1,12 @@
-﻿using Aircash.Business.Settings;
+﻿using Aircash.Business.HttpClientService.ServiceHelpers;
+using Aircash.DataContract.Settings;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Web;
 
 namespace Aircash.Business
 {
@@ -14,7 +18,10 @@ namespace Aircash.Business
             {
                 client.BaseAddress = new Uri(appSettings.AmadeusApi.ApiUrl);
                 client.Timeout = TimeSpan.FromSeconds(5);
+                client.DefaultRequestHeaders.Accept
+                    .Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
             });
         }
     }
+
 }

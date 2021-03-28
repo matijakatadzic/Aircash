@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Aircash.Business.HttpClientService;
+using Aircash.Business.HttpClientService.ServiceHelpers;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +11,9 @@ namespace Aircash.Business
     {
         public static void AddBusiness(this IServiceCollection services)
         {
+            services.AddScoped<IAmadeusHotelHttpClientService, AmadeusHotelHttpClientService>();
+
+            services.AddSingleton<IOathTokenService, OathTokenService>();
 
         }
     }
