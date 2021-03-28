@@ -16,9 +16,20 @@ namespace Aircash.Repository.DataLayer.Repository
             _mainEntities = mainEntities;
         }
 
-        public async Task<IEnumerable<Hotel>> GetHotelDataAsync(string cityCode, DateTime checkInDate, DateTime checkOutDate, int adults)
+        public async Task<IEnumerable<Hotel>> GetHotelDataAsync(string cityCode, DateTime checkInDate, DateTime checkOutDate, int adults, bool available)
         {
-            var query = _mainEntities.Hotels.Where(x => x.CityCode == cityCode);
+            var query = _mainEntities.Hotels
+                .Include(i=> i.Address)
+                .Include(i => i.Description)
+                .Include(i => i.Offers)
+                .ThenInclude(i => i.Price)
+                .Where(x => x.CityCode == cityCode);
+
+            if (available)
+            {
+                query = query.Where(x => x.Offers.Any(y => y.CheckInDate >= checkInDate && y.CheckOutDate <= checkOutDate));
+            }
+
             return await query.ToListAsync();
         }
 

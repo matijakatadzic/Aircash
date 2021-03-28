@@ -1,4 +1,5 @@
 ﻿using Aircash.Business.HttpClientService;
+using Aircash.DataContract;
 using Aircash.DataContract.HotelResponse;
 using Aircash.Repository.DataLayer.Models.Hotels;
 using Aircash.Repository.DataLayer.Repository;
@@ -24,29 +25,37 @@ namespace Aircash.Business.DataServices
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Hotel>> GetHotelDataAsync(string cityCode, DateTime checkInDate, DateTime checkOutDate, int adults)
+        public async Task<ResponseModel<IEnumerable<Hotel>>> GetHotelDataAsync(string cityCode, DateTime checkInDate, DateTime checkOutDate, int adults, bool available)
         {
             IEnumerable<Hotel> hotels;
 
-            hotels = await _hotelRepository.GetHotelDataAsync(cityCode, checkInDate,checkOutDate, adults);
+            hotels = await _hotelRepository.GetHotelDataAsync(cityCode, checkInDate,checkOutDate, adults, available);
 
             if(hotels.Count() == 0)
             {
-                var hotelResponse = await _amadeusHotelHttpClientService.GetHotelDataAsync(cityCode, checkInDate, checkOutDate, adults);
+                var hotelResponse = await _amadeusHotelHttpClientService.GetHotelDataAsync(cityCode, checkInDate, checkOutDate, adults, available);
+
+                if(!string.IsNullOrEmpty(hotelResponse.ErrorMsg))
+                {
+                    return new ResponseModel<IEnumerable<Hotel>> { ErrorMsg = hotelResponse.ErrorMsg };
+                }
 
                 List<Hotel> mapHotel = new List<Hotel>();
 
-                foreach (var item in hotelResponse.data)
+                foreach (var item in hotelResponse.Value.data)
                 {
                    var hotel = _mapper.Map<HotelResponse, Hotel>(item.hotel);
+                    hotel.Offers = _mapper.Map<IEnumerable<OfferResponse>, IEnumerable<Offer>>(item.offers).ToList();
+                    hotel.Available = item.available;
                     mapHotel.Add(hotel);
                 }
 
                 await _hotelRepository.SaveHotelsAsync(mapHotel);
-                return mapHotel;
+
+                hotels = mapHotel;
             }
 
-            return hotels;
+            return new ResponseModel<IEnumerable<Hotel>> { Value = hotels};
         }
     }
 }

@@ -12,5 +12,7 @@ namespace Aircash.Repository.DataLayer.Models.Hotels
         public string PostalCode { get; set; }
         public string CityName { get; set; }
         public string CountryCode { get; set; }
+        public string AddressLine { get; set; }
+
     }
 }

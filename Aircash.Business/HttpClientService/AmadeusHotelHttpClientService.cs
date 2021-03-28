@@ -1,4 +1,5 @@
 ﻿using Aircash.Business.HttpClientService.ServiceHelpers;
+using Aircash.DataContract;
 using Aircash.DataContract.HotelResponse;
 using log4net;
 using Newtonsoft.Json;
@@ -24,20 +25,46 @@ namespace Aircash.Business.HttpClientService
         }
 
 
-        public async Task<AmadeusHotelResponse> GetHotelDataAsync(string cityCode, DateTime checkInDate, DateTime checkOutDate, int adults)
+        public async Task<ResponseModel<AmadeusHotelResponse>> GetHotelDataAsync(string cityCode, DateTime checkInDate
+            , DateTime checkOutDate, int adults, bool available)
         {
-            var token = await _tokenService.GetTokenAsync();
+            try
+            {
+                _logger.Info($"{MethodBase.GetCurrentMethod()} execute");
+                var token = await _tokenService.GetTokenAsync();
 
-            _client = _httpClientFactory.CreateClient("AmadeusApi");
-            _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token.OathToken}");
+                _client = _httpClientFactory.CreateClient("AmadeusApi");
+                _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token.OathToken}");
 
-            var response 
-                = await _client
-                .GetAsync(
-                    string.Format(ServiceUrlHelper.GetData(),cityCode,checkInDate.ToString("yyyy-MM-dd"), checkOutDate.ToString("yyyy-MM-dd"), adults)
-                    );
+                var response
+                    = await _client.GetAsync(string.Format(
+                            ServiceUrlHelper.GetData(), cityCode
+                            , checkInDate.ToString("yyyy-MM-dd"), checkOutDate.ToString("yyyy-MM-dd"), adults, available));
 
-            return JsonConvert.DeserializeObject<AmadeusHotelResponse>(await response.Content.ReadAsStringAsync());
+                if (response.IsSuccessStatusCode)
+                {
+                    var amadeusHotelResponse = JsonConvert.DeserializeObject<AmadeusHotelResponse>(await response.Content.ReadAsStringAsync());
+                    return new ResponseModel<AmadeusHotelResponse>
+                    {
+                        Value = amadeusHotelResponse
+                    };
+
+                }
+
+                return new ResponseModel<AmadeusHotelResponse>
+                {
+                    ErrorMsg = "Some error!!"
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Error:", ex);
+                return new ResponseModel<AmadeusHotelResponse>
+                {
+                    ErrorMsg = $"Error: {ex.Message} InnerException {ex?.InnerException}"
+                };
+            }
+
         }
     }
 }

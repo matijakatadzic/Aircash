@@ -15,7 +15,7 @@
             </summary>
             <param name="dataService"></param>
         </member>
-        <member name="M:Aircash.Controllers.HotelController.Get(System.String,System.DateTime,System.DateTime,System.Int32)">
+        <member name="M:Aircash.Controllers.HotelController.Get(System.String,System.DateTime,System.DateTime,System.Int32,System.Boolean)">
             <summary>
             GetHotelsAsync
             </summary>

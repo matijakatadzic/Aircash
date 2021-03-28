@@ -29,10 +29,12 @@ namespace Aircash.Repository.AutoMapper
                 .ForMember(t => t.text, opt => opt.MapFrom(t => t.Text))
                 .ReverseMap();
 
-            CreateMap<Address, AddressResponse>()
-                .ForMember(t => t.cityName, opt => opt.MapFrom(t => t.CityName))
-                .ForMember(t => t.countryCode, opt => opt.MapFrom(t => t.CountryCode))
-                .ForMember(t => t.postalCode, opt => opt.MapFrom(t => t.PostalCode))
+            CreateMap<AddressResponse, Address>()
+                .ForMember(t => t.CityName, opt => opt.MapFrom(t => t.cityName))
+                .ForMember(t => t.CountryCode, opt => opt.MapFrom(t => t.countryCode))
+                .ForMember(t => t.PostalCode, opt => opt.MapFrom(t => t.postalCode))
+                .ForMember(t => t.AddressLine, opt => opt.MapFrom(t => ToLine(t.lines)))
+
                 .ReverseMap();
 
             CreateMap<Hotel, HotelResponse>()
@@ -47,6 +49,11 @@ namespace Aircash.Repository.AutoMapper
                 .ForMember(t => t.rating, otp => otp.MapFrom(t => t.Rating))
                 .ForMember(t => t.type, otp => otp.MapFrom(t => t.Type))
                 .ReverseMap();
+        }
+
+        private string ToLine(List<string> lines)
+        {
+            return string.Join(", ", lines.ToArray());
         }
     }
 }

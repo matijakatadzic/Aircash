@@ -41,8 +41,10 @@ namespace Aircash.Business.HttpClientService.ServiceHelpers
 
         public async Task<Token> GetTokenAsync()
         {
-            if(_token == null || _token.ExpireTime <= DateTime.Now)
+            _logger.Info($"{MethodBase.GetCurrentMethod()} execute");
+            if (_token == null || _token.ExpireTime <= DateTime.Now)
             {
+                _logger.Info($"Token expire");
                 await GetNewOathTokenAsync();
             }
 

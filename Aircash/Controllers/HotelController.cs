@@ -38,11 +38,16 @@ namespace Aircash.Controllers
         /// <returns>List of Hotels </returns>
         [Route("GetHotelsAsync/{cityCode}/{checkInDate}/{checkOutDate}/{adults}")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Hotel>>> Get(string cityCode, DateTime checkInDate, DateTime checkOutDate, int adults)
+        public async Task<ActionResult<IEnumerable<Hotel>>> Get(string cityCode, DateTime checkInDate, DateTime checkOutDate, int adults, bool available = true)
         {
-            var response = await _dataService.GetHotelDataAsync(cityCode, checkInDate, checkOutDate, adults);
+            var response = await _dataService.GetHotelDataAsync(cityCode, checkInDate, checkOutDate, adults, available);
 
-            return Ok(response);
+            if (!string.IsNullOrEmpty(response.ErrorMsg))
+            {
+                return BadRequest(response.ErrorMsg);
+            }
+
+            return Ok(response.Value);
         }
     }
 }

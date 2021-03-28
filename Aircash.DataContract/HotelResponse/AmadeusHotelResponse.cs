@@ -62,6 +62,7 @@ namespace Aircash.DataContract.HotelResponse
         [JsonProperty("hotel")]
         public HotelResponse hotel { get; set; }
         public bool available { get; set; }
+        [JsonProperty("offers")]
         public List<OfferResponse> offers { get; set; }
     }
 
