@@ -17,7 +17,7 @@ namespace Aircash.Business
             services.AddHttpClient("AmadeusApi", client =>
             {
                 client.BaseAddress = new Uri(appSettings.AmadeusApi.ApiUrl);
-                client.Timeout = TimeSpan.FromSeconds(5);
+                client.Timeout = TimeSpan.FromSeconds(60);
                 client.DefaultRequestHeaders.Accept
                     .Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
             });

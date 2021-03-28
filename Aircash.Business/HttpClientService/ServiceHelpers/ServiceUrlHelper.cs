@@ -6,6 +6,6 @@ namespace Aircash.Business.HttpClientService.ServiceHelpers
 {
     public static class ServiceUrlHelper
     {
-        public static string GetData() => $"hotel-offers?cityCode=PAR&roomQuantity=1&adults=2&radius=100&radiusUnit=KM&paymentPolicy=NONE&includeClosed=false&bestRateOnly=true&view=FULL&sort=NONE";
+        public static string GetData() => "hotel-offers?cityCode={0}&checkInDate={1}&checkOutDate={2}&roomQuantity=1&adults={3}&radius=100&radiusUnit=KM&paymentPolicy=NONE&includeClosed=true&bestRateOnly=false&view=FULL&sort=NONE";
     }
 }

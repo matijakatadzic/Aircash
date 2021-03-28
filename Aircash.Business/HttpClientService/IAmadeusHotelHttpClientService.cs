@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using Aircash.DataContract.HotelResponse;
+using System;
+using System.Threading.Tasks;
 
 namespace Aircash.Business.HttpClientService
 {
     public interface IAmadeusHotelHttpClientService
     {
-        Task GetDataAsync();
+        Task<AmadeusHotelResponse> GetHotelDataAsync(string cityCode, DateTime checkInDate, DateTime checkOutDate, int adults);
     }
 }

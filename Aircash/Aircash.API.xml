@@ -4,5 +4,26 @@
         <name>Aircash.API</name>
     </assembly>
     <members>
+        <member name="T:Aircash.Controllers.HotelController">
+            <summary>
+            Hotel API
+            </summary>
+        </member>
+        <member name="M:Aircash.Controllers.HotelController.#ctor(Aircash.Business.DataServices.IDataService)">
+            <summary>
+            DI of IDataService
+            </summary>
+            <param name="dataService"></param>
+        </member>
+        <member name="M:Aircash.Controllers.HotelController.Get(System.String,System.DateTime,System.DateTime,System.Int32)">
+            <summary>
+            GetHotelsAsync
+            </summary>
+            <param name="cityCode"></param>
+            <param name="checkInDate"></param>
+            <param name="checkOutDate"></param>
+            <param name="adults"></param>
+            <returns>List of Hotels </returns>
+        </member>
     </members>
 </doc>
