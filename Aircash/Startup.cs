@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Aircash.Business;
-using Aircash.Business.Settings;
+using Aircash.DataContract.Settings;
 using Aircash.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
