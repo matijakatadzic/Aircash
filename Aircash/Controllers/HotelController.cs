@@ -43,7 +43,7 @@ namespace Aircash.Controllers
         /// <param name="checkInDate"></param>
         /// <param name="checkOutDate"></param>
         /// <param name="adults"></param>
-        /// /// <param name="available"></param>
+        /// <param name="available"></param>
         /// <returns>List of HotelsDTO </returns>
         [Route("GetHotelsAsync/{cityCode}/{checkInDate}/{checkOutDate}/{adults}")]
         [HttpGet]

@@ -2,6 +2,7 @@
 using Aircash.DataContract;
 using Aircash.DataContract.HotelResponse;
 using Aircash.Repository.DataLayer.Models.Hotels;
+using Aircash.Repository.DataLayer.Models.IataCodes;
 using Aircash.Repository.DataLayer.Repository;
 using AutoMapper;
 using System;
@@ -16,12 +17,15 @@ namespace Aircash.Business.DataServices
     {
         private IAmadeusHotelHttpClientService _amadeusHotelHttpClientService;
         private IHotelRepository _hotelRepository;
+        private IIataRepository _iataRepository;
         private readonly IMapper _mapper;
 
-        public DataService(IAmadeusHotelHttpClientService amadeusHotelHttpClientService, IHotelRepository hotelRepository, IMapper mapper)
+        public DataService(IAmadeusHotelHttpClientService amadeusHotelHttpClientService, 
+            IHotelRepository hotelRepository, IIataRepository iataRepository, IMapper mapper)
         {
             _amadeusHotelHttpClientService = amadeusHotelHttpClientService;
             _hotelRepository = hotelRepository;
+            _iataRepository = iataRepository;
             _mapper = mapper;
         }
 
@@ -56,6 +60,17 @@ namespace Aircash.Business.DataServices
             }
 
             return new ResponseModel<IEnumerable<Hotel>> { Value = hotels};
+        }
+
+        public async Task<ResponseModel<IEnumerable<IATA>>> GetIataDataAsync()
+        {
+            var iataCodes = await _iataRepository.GetIataDataAsync();
+            return new ResponseModel<IEnumerable<IATA>> { Value = iataCodes };
+        }
+
+        public async Task SaveIATACodesAsync(IEnumerable<IATA> myDeserializedClass)
+        {
+            await _iataRepository.SaveIATACodesAsync(myDeserializedClass);
         }
     }
 }
