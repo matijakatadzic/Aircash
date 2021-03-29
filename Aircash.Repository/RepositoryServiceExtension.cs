@@ -12,6 +12,8 @@ namespace Aircash.Repository
         {
             //Add your repositories here...
             services.AddTransient<IHotelRepository, HotelRepository>();
+            services.AddTransient<IIataRepository, IataRepository>();
+
         }
     }
 }

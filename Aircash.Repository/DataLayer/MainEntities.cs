@@ -1,4 +1,5 @@
 ﻿using Aircash.Repository.DataLayer.Models.Hotels;
+using Aircash.Repository.DataLayer.Models.IataCodes;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Aircash.Repository.DataLayer
         public DbSet<Description> Descriptions { get; set; }
         public DbSet<Price> Prices { get; set; }
         public DbSet<Offer> Offers { get; set; }
+        public DbSet<IATA> IATA { get; set; }
 
         public MainEntities(DbContextOptions<MainEntities> options)
             : base(options)

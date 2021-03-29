@@ -24,8 +24,25 @@
             <param name="checkInDate"></param>
             <param name="checkOutDate"></param>
             <param name="adults"></param>
-            /// <param name="available"></param>
+            <param name="available"></param>
             <returns>List of HotelsDTO </returns>
+        </member>
+        <member name="T:Aircash.API.Controllers.IataController">
+            <summary>
+            IATA codes controller
+            </summary>
+        </member>
+        <member name="M:Aircash.API.Controllers.IataController.#ctor(Aircash.Business.DataServices.IDataService)">
+            <summary>
+            DI of IDataService
+            </summary>
+            <param name="dataService"></param>
+        </member>
+        <member name="M:Aircash.API.Controllers.IataController.GetIataDataAsync">
+            <summary>
+            GetHotelsAsync
+            </summary>
+            <returns>List of IataDTO </returns>
         </member>
     </members>
 </doc>

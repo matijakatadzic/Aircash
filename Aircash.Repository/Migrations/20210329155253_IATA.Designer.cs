@@ -4,14 +4,16 @@ using Aircash.Repository.DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Aircash.Repository.Migrations
 {
     [DbContext(typeof(MainEntities))]
-    partial class MainEntitiesModelSnapshot : ModelSnapshot
+    [Migration("20210329155253_IATA")]
+    partial class IATA
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
