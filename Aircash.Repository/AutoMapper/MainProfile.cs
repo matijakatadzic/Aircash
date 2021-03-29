@@ -1,8 +1,10 @@
-﻿using Aircash.DataContract.HotelResponse;
+﻿using Aircash.DataContract.DTOs;
+using Aircash.DataContract.HotelResponse;
 using Aircash.Repository.DataLayer.Models.Hotels;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Aircash.Repository.AutoMapper
@@ -49,6 +51,27 @@ namespace Aircash.Repository.AutoMapper
                 .ForMember(t => t.rating, otp => otp.MapFrom(t => t.Rating))
                 .ForMember(t => t.type, otp => otp.MapFrom(t => t.Type))
                 .ReverseMap();
+
+            CreateMap<Hotel, HotelDTO>()
+                .ForMember(t => t.Description, opt => opt.MapFrom(t => AddDescription(t.Description)))
+                .ForMember(t => t.ID, opt => opt.MapFrom(t => t.ID))
+                .ForMember(t => t.Stars, opt => opt.MapFrom(t => t.Rating))
+                .ForMember(t => t.Price, opt => opt.MapFrom(t => AddMinPrice(t.Offers)));
+        }
+
+        private object AddMinPrice(ICollection<Offer> offers)
+        {
+            if(!offers.Any())
+            {
+                return "No offer for CheackIn and CheackOut dates";
+            }
+            var minPrice = offers.OrderBy(m => m.Price.Total).First();
+            return $"{minPrice.Price.Total} {minPrice.Price.Currency}";
+        }
+
+        private object AddDescription(Description description)
+        {
+            return description != null ? description.Text : "";
         }
 
         private string ToLine(List<string> lines)

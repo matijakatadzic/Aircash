@@ -9,13 +9,14 @@
             Hotel API
             </summary>
         </member>
-        <member name="M:Aircash.Controllers.HotelController.#ctor(Aircash.Business.DataServices.IDataService)">
+        <member name="M:Aircash.Controllers.HotelController.#ctor(Aircash.Business.DataServices.IDataService,AutoMapper.IMapper)">
             <summary>
             DI of IDataService
             </summary>
             <param name="dataService"></param>
+            <param name="mapper"></param>
         </member>
-        <member name="M:Aircash.Controllers.HotelController.Get(System.String,System.DateTime,System.DateTime,System.Int32,System.Boolean)">
+        <member name="M:Aircash.Controllers.HotelController.GetHotelsWithOffersAsync(System.String,System.DateTime,System.DateTime,System.Int32,System.Boolean)">
             <summary>
             GetHotelsAsync
             </summary>
@@ -23,7 +24,8 @@
             <param name="checkInDate"></param>
             <param name="checkOutDate"></param>
             <param name="adults"></param>
-            <returns>List of Hotels </returns>
+            /// <param name="available"></param>
+            <returns>List of HotelsDTO </returns>
         </member>
     </members>
 </doc>
