@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Aircash.DataContract\Aircash.DataContract.csproj" />
+    <ProjectReference Include="..\Aircash.Repository\Aircash.Repository.csproj" />
   </ItemGroup>
 
 </Project>
