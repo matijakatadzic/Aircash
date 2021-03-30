@@ -33,7 +33,7 @@ namespace Aircash.API.Controllers
             _dataService = dataService;
         }
         /// <summary>
-        /// GetHotelsAsync
+        /// GetIataDataAsync
         /// </summary>
         /// <returns>List of IataDTO </returns>
         [Route("GetIataDataAsync")]

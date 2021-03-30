@@ -55,6 +55,7 @@ namespace Aircash.Repository.AutoMapper
             CreateMap<Hotel, HotelDTO>()
                 .ForMember(t => t.Description, opt => opt.MapFrom(t => AddDescription(t.Description)))
                 .ForMember(t => t.ID, opt => opt.MapFrom(t => t.ID))
+                .ForMember(t => t.Name, opt => opt.MapFrom(t => t.Name))
                 .ForMember(t => t.Stars, opt => opt.MapFrom(t => t.Rating))
                 .ForMember(t => t.Price, opt => opt.MapFrom(t => AddMinPrice(t.Offers)));
         }

@@ -39,7 +39,7 @@ namespace Aircash.Business.HttpClientService
                 var response
                     = await _client.GetAsync(string.Format(
                             ServiceUrlHelper.GetData(), cityCode
-                            , checkInDate.ToString("yyyy-MM-dd"), checkOutDate.ToString("yyyy-MM-dd"), adults, available));
+                            , checkInDate.ToString("yyyy-MM-dd"), checkOutDate.ToString("yyyy-MM-dd"), adults, !available));
 
                 if (response.IsSuccessStatusCode)
                 {

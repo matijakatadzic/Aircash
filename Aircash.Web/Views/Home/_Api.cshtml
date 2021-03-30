@@ -1,0 +1,47 @@
+﻿@model ResponseModel<IEnumerable<HotelDTO>>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMsg))
+{
+    <p class="alert-danger">@Model.ErrorMsg</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Stars")
+                </th>
+                <th>
+                    @Html.DisplayName("Description")
+                </th>
+                <th>
+                    @Html.DisplayName("Price")
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Value)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Stars)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<IataDTO>
+@{
+    ViewData["Title"] = "Api";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Api</h1>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.css" />
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <label for="checkIn">Iata code:</label>
+            <div class="row-fluid">
+                <select id="iata-select" class="selectpicker" data-show-subtext="true" data-live-search="true">
+                    @foreach (var iata in Model)
+                    {
+                        <optgroup label="@iata.Country">
+                            @foreach (var item in iata.IataCityCodeDTO)
+                            {
+                                <option data-tokens="@item.Code" value="@item.Code">@(item.City + " - " + item.Code)</option>
+                            }
+                        </optgroup>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label for="checkIn">Check In:</label>
+            <div class="form-group">
+                <input id="checkIn" type="date" name="checkIn" max="3000-12-31" value="@DateTime.Now.ToString("yyyy-MM-dd")"
+                       min="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label for="checkOut">Check out:</label>
+            <div class="form-group">
+                <input id="checkOut" type="date" name="checkOut" max="3000-12-31" value="@DateTime.Now.ToString("yyyy-MM-dd")"
+                       min="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control">
+            </div>
+
+        </div>
+        <div class="col-md-2">
+            <label for="adult">Adults:</label>
+            <div class="form-group">
+                <input id="adult" type="number" name="adult" class="form-control" value="1" min="1" max="100">
+            </div>
+
+        </div>
+        <div class="col-md-2">
+            <label for="available">Available:</label>
+            <div class="form-group text-center">
+                <input class="form-check-input" type="checkbox" value="" id="available" checked>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <button id="getBtn" type="button" class="btn btn-success">Get data</button>
+    </div>
+    <div class="row">
+        <div id="partial"></div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#getBtn").click(function () {
+            var iataSelect = $('#iata-select').val();
+            var checkIn = $('#checkIn').val();
+            var checkOut = $('#checkOut').val();
+            var adult = $('#adult').val();
+            var available = $('#available').is(":checked");
+
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("_api", "Home")',
+                data: { iataSelect: iataSelect, checkIn: checkIn, checkOut: checkOut, adult: adult, available: available, },
+                success: function (data) {
+                    alert();
+                    $('#partial').html(data);
+                }
+
+            });
+        });
+    });
+</script>
