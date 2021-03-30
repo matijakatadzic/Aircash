@@ -36,6 +36,11 @@ namespace Aircash.Web.Controllers
             return View(response.Value);
         }
 
+        public async Task<IActionResult> _Api(string iataSelect, DateTime checkIn, DateTime checkOut, int adult, bool available)
+        {
+            var response = await _apiService.GetHotelsAndOffersAsync(iataSelect, checkIn, checkOut, adult, available);
+            return PartialView(response);
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

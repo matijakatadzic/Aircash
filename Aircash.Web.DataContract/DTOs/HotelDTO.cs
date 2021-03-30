@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Aircash.DataContract.DTOs
+namespace Aircash.Web.DataContract.DTOs
 {
     public class HotelDTO
     {

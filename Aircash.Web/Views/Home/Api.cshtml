@@ -5,12 +5,14 @@
 }
 
 <h1>Api</h1>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.css" />
 
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
-            <span class="badge badge-default">IATA</span>
+            <label for="checkIn">Iata code:</label>
             <div class="row-fluid">
                 <select id="iata-select" class="selectpicker" data-show-subtext="true" data-live-search="true">
                     @foreach (var iata in Model)
@@ -43,7 +45,7 @@
         <div class="col-md-2">
             <label for="adult">Adults:</label>
             <div class="form-group">
-                <input id="adult" type="text" name="adult" class="form-control">
+                <input id="adult" type="number" name="adult" class="form-control" value="1" min="1" max="100">
             </div>
 
         </div>
@@ -54,7 +56,7 @@
             </div>
 
         </div>
-        
+
     </div>
     <div class="row">
         <button id="getBtn" type="button" class="btn btn-success">Get data</button>
@@ -63,7 +65,10 @@
         <div id="partial"></div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.js"></script>
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -72,20 +77,18 @@
             var checkIn = $('#checkIn').val();
             var checkOut = $('#checkOut').val();
             var adult = $('#adult').val();
-            var available = $('#available').val();
+            var available = $('#available').is(":checked");
 
-            alert(iataSelect, checkIn, checkOut, adult, available);
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("_api", "Home")',
+                data: { iataSelect: iataSelect, checkIn: checkIn, checkOut: checkOut, adult: adult, available: available, },
+                success: function (data) {
+                    alert();
+                    $('#partial').html(data);
+                }
+
+            });
         });
-
-        @*$.ajax({
-            type: "GET",
-            url: '@Url.Action("UpdateApplicantStatus", "Application")',
-            contentType: "application/json; charset=utf-8",
-            data: { id: appId, status: selectedItem },
-            dataType: "json",
-            success: function () { alert('Success'); }
-
-        });*@
-
     });
 </script>

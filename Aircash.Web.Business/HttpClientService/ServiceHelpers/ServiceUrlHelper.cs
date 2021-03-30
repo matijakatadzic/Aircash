@@ -8,5 +8,7 @@ namespace Aircash.Web.Business.HttpClientService.ServiceHelpers
     {
         internal static string GetIataCode() => "Iata/GetIataDataAsync";
 
+        internal static string GetHotels() => "Hotel/GetHotelsAsync/{0}/{1}/{2}/1?available={3}";
+
     }
 }

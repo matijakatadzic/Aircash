@@ -22,6 +22,42 @@ namespace Aircash.Web.Business.HttpClientService
             _httpClientFactory = httpClientFactory;
         }
 
+        public async Task<ResponseModel<IEnumerable<HotelDTO>>> GetHotelsAndOffersAsync(string iataSelect, DateTime checkIn, 
+            DateTime checkOut, int adult, bool available)
+        {
+            try
+            {
+                _logger.Info($"{MethodBase.GetCurrentMethod()} execute");
+
+                _client = _httpClientFactory.CreateClient("Api");
+
+                var response = await _client.GetAsync(String.Format(ServiceUrlHelper.GetHotels()
+                    ,iataSelect, checkIn.ToString("yyyy-MM-dd"), checkOut.ToString("yyyy-MM-dd"), available));
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var hotels = JsonConvert.DeserializeObject<IEnumerable<HotelDTO>>(await response.Content.ReadAsStringAsync());
+                    return new ResponseModel<IEnumerable<HotelDTO>>
+                    {
+                        Value = hotels
+                    };
+                }
+
+                return new ResponseModel<IEnumerable<HotelDTO>>
+                {
+                    ErrorMsg = "Some error!!"
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Error:", ex);
+                return new ResponseModel<IEnumerable<HotelDTO>>
+                {
+                    ErrorMsg = $"Error: {ex.Message} InnerException {ex?.InnerException}"
+                };
+            }
+        }
+
         public async Task<ResponseModel<IEnumerable<IataDTO>>> GetIataCodeAsync()
         {
             try
