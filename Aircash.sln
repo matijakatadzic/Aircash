@@ -3,17 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30406.217
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aircash.API", "Aircash\Aircash.API.csproj", "{5A1EDE17-3EAA-4492-8CBA-48EA380ADCC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aircash.API", "Aircash\Aircash.API.csproj", "{5A1EDE17-3EAA-4492-8CBA-48EA380ADCC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aircash.Web", "Aircash.Web\Aircash.Web.csproj", "{175D23EC-A994-444F-8051-F3C285E65151}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aircash.Web", "Aircash.Web\Aircash.Web.csproj", "{175D23EC-A994-444F-8051-F3C285E65151}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aircash.Business", "Aircash.Business\Aircash.Business.csproj", "{65CA0B4F-47CB-439D-8B18-A02A3AE59CDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aircash.Business", "Aircash.Business\Aircash.Business.csproj", "{65CA0B4F-47CB-439D-8B18-A02A3AE59CDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aircash.DataContract", "Aircash.DataContract\Aircash.DataContract.csproj", "{CC7D9EB0-8858-4A1B-A440-95FB983FAF3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aircash.DataContract", "Aircash.DataContract\Aircash.DataContract.csproj", "{CC7D9EB0-8858-4A1B-A440-95FB983FAF3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aircash.Repository", "Aircash.Repository\Aircash.Repository.csproj", "{15BDDD42-46A3-4772-8309-D8EA583B49F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aircash.Repository", "Aircash.Repository\Aircash.Repository.csproj", "{15BDDD42-46A3-4772-8309-D8EA583B49F3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WEB", "WEB", "{D6AB044F-7C5E-4F21-BC0A-87B7C18380BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{4F4C74C8-8E9E-4732-8AA9-D0AFFCF74A5D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aircash.Web.Business", "Aircash.Web.Business\Aircash.Web.Business.csproj", "{DAF5CD2E-5B6B-4D9B-AA8A-71C80D8EC88C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aircash.Web.DataContract", "Aircash.Web.DataContract\Aircash.Web.DataContract.csproj", "{1B1AAF04-7B82-492B-8346-1C0E23E8B764}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,13 +47,26 @@ Global
 		{15BDDD42-46A3-4772-8309-D8EA583B49F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15BDDD42-46A3-4772-8309-D8EA583B49F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15BDDD42-46A3-4772-8309-D8EA583B49F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAF5CD2E-5B6B-4D9B-AA8A-71C80D8EC88C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAF5CD2E-5B6B-4D9B-AA8A-71C80D8EC88C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAF5CD2E-5B6B-4D9B-AA8A-71C80D8EC88C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAF5CD2E-5B6B-4D9B-AA8A-71C80D8EC88C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B1AAF04-7B82-492B-8346-1C0E23E8B764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B1AAF04-7B82-492B-8346-1C0E23E8B764}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B1AAF04-7B82-492B-8346-1C0E23E8B764}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B1AAF04-7B82-492B-8346-1C0E23E8B764}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{5A1EDE17-3EAA-4492-8CBA-48EA380ADCC1} = {D6AB044F-7C5E-4F21-BC0A-87B7C18380BC}
+		{5A1EDE17-3EAA-4492-8CBA-48EA380ADCC1} = {4F4C74C8-8E9E-4732-8AA9-D0AFFCF74A5D}
 		{175D23EC-A994-444F-8051-F3C285E65151} = {D6AB044F-7C5E-4F21-BC0A-87B7C18380BC}
+		{65CA0B4F-47CB-439D-8B18-A02A3AE59CDB} = {4F4C74C8-8E9E-4732-8AA9-D0AFFCF74A5D}
+		{CC7D9EB0-8858-4A1B-A440-95FB983FAF3E} = {4F4C74C8-8E9E-4732-8AA9-D0AFFCF74A5D}
+		{15BDDD42-46A3-4772-8309-D8EA583B49F3} = {4F4C74C8-8E9E-4732-8AA9-D0AFFCF74A5D}
+		{DAF5CD2E-5B6B-4D9B-AA8A-71C80D8EC88C} = {D6AB044F-7C5E-4F21-BC0A-87B7C18380BC}
+		{1B1AAF04-7B82-492B-8346-1C0E23E8B764} = {D6AB044F-7C5E-4F21-BC0A-87B7C18380BC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {995EE639-E276-48FD-BC21-B2D4D1A9B3AC}

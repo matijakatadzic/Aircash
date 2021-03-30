@@ -1,0 +1,91 @@
+﻿@model IEnumerable<IataDTO>
+@{
+    ViewData["Title"] = "Api";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Api</h1>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <span class="badge badge-default">IATA</span>
+            <div class="row-fluid">
+                <select id="iata-select" class="selectpicker" data-show-subtext="true" data-live-search="true">
+                    @foreach (var iata in Model)
+                    {
+                        <optgroup label="@iata.Country">
+                            @foreach (var item in iata.IataCityCodeDTO)
+                            {
+                                <option data-tokens="@item.Code" value="@item.Code">@(item.City + " - " + item.Code)</option>
+                            }
+                        </optgroup>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label for="checkIn">Check In:</label>
+            <div class="form-group">
+                <input id="checkIn" type="date" name="checkIn" max="3000-12-31" value="@DateTime.Now.ToString("yyyy-MM-dd")"
+                       min="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label for="checkOut">Check out:</label>
+            <div class="form-group">
+                <input id="checkOut" type="date" name="checkOut" max="3000-12-31" value="@DateTime.Now.ToString("yyyy-MM-dd")"
+                       min="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control">
+            </div>
+
+        </div>
+        <div class="col-md-2">
+            <label for="adult">Adults:</label>
+            <div class="form-group">
+                <input id="adult" type="text" name="adult" class="form-control">
+            </div>
+
+        </div>
+        <div class="col-md-2">
+            <label for="available">Available:</label>
+            <div class="form-group text-center">
+                <input class="form-check-input" type="checkbox" value="" id="available" checked>
+            </div>
+
+        </div>
+        
+    </div>
+    <div class="row">
+        <button id="getBtn" type="button" class="btn btn-success">Get data</button>
+    </div>
+    <div class="row">
+        <div id="partial"></div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#getBtn").click(function () {
+            var iataSelect = $('#iata-select').val();
+            var checkIn = $('#checkIn').val();
+            var checkOut = $('#checkOut').val();
+            var adult = $('#adult').val();
+            var available = $('#available').val();
+
+            alert(iataSelect, checkIn, checkOut, adult, available);
+        });
+
+        @*$.ajax({
+            type: "GET",
+            url: '@Url.Action("UpdateApplicantStatus", "Application")',
+            contentType: "application/json; charset=utf-8",
+            data: { id: appId, status: selectedItem },
+            dataType: "json",
+            success: function () { alert('Success'); }
+
+        });*@
+
+    });
+</script>
